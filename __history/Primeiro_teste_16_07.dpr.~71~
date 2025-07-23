@@ -7,6 +7,8 @@ program Primeiro_teste_16_07;
 uses
   System.SysUtils;
 
+//Globals
+var logado : Boolean;
 
 
 procedure MostrarMenu;
@@ -15,9 +17,19 @@ begin
   WriteLn('');
   WriteLn(' -- Menu ---');
   WriteLn('| 1-Login   |');
-  WriteLn('| 2-Cadastro|');
   WriteLn('| 9-Sair    |');
   WriteLn(' -----------');
+
+end;
+
+procedure MostrarMenuCadastro;
+begin
+
+  WriteLn('');
+  WriteLn(' ------- Menu --------');
+  WriteLn('| 1-Adicionar Usuário |');
+  WriteLn('| 9-Logout              |');
+  WriteLn(' ---------------------');
 
 end;
 
@@ -25,12 +37,22 @@ end;
         usuarioAdmin:String = 'Admin';
 
 
+
+
 function LoginValido(usuario,senha: String) :Boolean;
 begin
 
-  Result := (usuario = usuarioAdmin) and (senha = senhaAdmin)
+    Result := false;
+   if (usuario = usuarioAdmin) and (senha = senhaAdmin) then
+   begin
+    logado := true;
+    result := true;
+
+   end;
 
 end;
+
+
 
 
 
@@ -40,7 +62,7 @@ var i :Integer;
 procedure LoadView (n : Integer);
 begin
 
-  for i := 0 to n do begin
+  for i := 0 to (n - 1) do begin
 
           Sleep(500);
           Write('.') ;
@@ -60,7 +82,7 @@ begin
 
     Write('Saindo');
 
-    LoadView;
+    LoadView(3);
 
     sair := true;
 
@@ -73,8 +95,8 @@ end;
 
 
    //Variaveis Main
-  var senhaUsuario, loginUsuario, opcaoUsuario: String;
-  var tentativas : Integer;
+  var senhaUsuario, loginUsuario, opcaoUsuario, nome, email: String;
+  var tentativas, idade : Integer;
 
 
 
@@ -110,15 +132,13 @@ end;
         begin
 
           Write('Login Realizado com sucesso');
-          LoadView;
+          LoadView(5);
 
-          //Continuação do Código
-          exit;
 
         end else begin
 
           Write('Login Inválido');
-          LoadView;
+          LoadView(3);
           tentativas := tentativas + 1;
 
 
@@ -137,7 +157,6 @@ end;
 
 
 
-
       end else if (opcaoUsuario = '9') then
         begin
 
@@ -151,6 +170,37 @@ end;
         continue;
 
         end;
+
+
+
+
+
+
+
+
+            while logado do
+
+            begin
+              MostrarMenuCadastro;
+              ReadLn(opcaoUsuario);
+
+              if (opcaoUsuario = '1') then
+              begin
+              Write('Digite o nome completo do usuário: ');
+              ReadLn(nome);
+              Write('Digite a idade do usuário: ');
+              ReadLn(idade);
+              Write('Digite o email do usuário: ');
+              ReadLn(email);
+
+              end else if (opcaoUsuario = '9') then
+              begin
+
+                logado := false;
+
+              end;
+
+            end;
 
 
 
