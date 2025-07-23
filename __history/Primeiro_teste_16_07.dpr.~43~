@@ -40,7 +40,7 @@ var i :Integer;
 procedure LoadView (n : Integer);
 begin
 
-  for i := 0 to (n - 1) do begin
+  for i := 0 to 4 do begin
 
           Sleep(500);
           Write('.') ;
@@ -60,7 +60,7 @@ begin
 
     Write('Saindo');
 
-    LoadView(3);
+    LoadView;
 
     sair := true;
 
@@ -110,7 +110,7 @@ end;
         begin
 
           Write('Login Realizado com sucesso');
-          LoadView(5);
+          LoadView;
 
           //Continuação do Código
           exit;
@@ -118,7 +118,7 @@ end;
         end else begin
 
           Write('Login Inválido');
-          LoadView(3);
+          LoadView;
           tentativas := tentativas + 1;
 
 
